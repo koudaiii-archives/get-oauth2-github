@@ -5,7 +5,8 @@ require "httparty"
 get '/auth' do
   query = {
     client_id: ENV["GITHUB_APP_ID"],
-    redirect_uri: "#{env['rack.url_scheme']}://#{env['HTTP_HOST']}/auth.callback"
+    redirect_uri: "#{env['rack.url_scheme']}://#{env['HTTP_HOST']}/auth.callback",
+    scope: "repo"
   }.map{|k,v|
     "#{k}=#{URI.encode v}"
   }.join("&")
