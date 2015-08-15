@@ -2,6 +2,9 @@ require "sinatra"
 require "uri"
 require "httparty"
 
+get '/' do
+  "Hello world"
+end
 get '/auth' do
   query = {
     client_id: ENV["GITHUB_APP_ID"],
@@ -32,6 +35,7 @@ get '/auth.callback' do
   halt 500, "github auth error" unless res.code == 200
   begin
     token = JSON.parse(res.body)["access_token"]  ## tokenを取得！
+    puts "#{token}"
   rescue
     halt 500, "github auth error"
   end
